@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Today Todo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .todo-app {
+      width: 360px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+      margin: 0 0 16px 0;
+      text-align: center;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: #f7f7fb;
+      border-radius: 10px;
+      font-size: 14px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    li span {
+      flex: 1;
+      margin-left: 8px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="todo-app">
+    <h1>오늘의 할 일</h1>
+    <div class="input-group">
+      <input id="todoInput" type="text" placeholder="할 일을 입력하세요" />
+      <button onclick="addTodo()">추가</button>
+    </div>
+    <ul id="todoList"></ul>
+  </div>
+
+  <script>
+    function addTodo() {
+      const input = document.getElementById("todoInput");
+      const text = input.value.trim();
+      if (!text) return;
+
+      const li = document.createElement("li");
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.onchange = () => li.remove();
+
+      const span = document.createElement("span");
+      span.textContent = text;
+
+      li.appendChild(checkbox);
+      li.appendChild(span);
+
+      document.getElementById("todoList").appendChild(li);
+      input.value = "";
+    }
+  </script>
+</body>
+</html>
